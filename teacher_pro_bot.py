@@ -455,7 +455,7 @@ async def btn_subscribe(update: Update, context: ContextTypes.DEFAULT_TYPE):
     tid = update.effective_user.id
     teacher = get_teacher(tid)
     if not teacher:
-        await update.message.reply_text("Please send /start to register first.")
+        await update.effective_message.reply_text("Please send /start to register first.")
         return
 
     # Check pending payment
@@ -466,14 +466,14 @@ async def btn_subscribe(update: Update, context: ContextTypes.DEFAULT_TYPE):
     conn.close()
 
     if pending:
-        await update.message.reply_text(
+        await update.effective_message.reply_text(
             "⏳ You already have a *pending payment* waiting for approval.\n\n"
             "Please wait for admin to approve it.",
             parse_mode="Markdown",
         )
         return
 
-    await update.message.reply_text(
+    await update.effective_message.reply_text(
         f"💳 *Subscribe to Teacher Pro*\n\n"
         f"Monthly fee: *{MONTHLY_FEE} birr*\n\n"
         f"📲 Send payment to:\n"
